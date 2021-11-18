@@ -3,7 +3,6 @@ let limit = process.argv[2] ? +process.argv[2] : 1
 let date = new Date().toLocaleDateString('en-us')
 date = date.split('/');
 date = `${date[2]}/${date[0]}/${date[1]}`
-console.log(process.argv[2] ? +process.argv[2]:1);
 if (!fs.existsSync(`./backups/${date}`)){
     fs.mkdirSync(`./backups/${date}`, { recursive: true });
 }

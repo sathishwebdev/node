@@ -1,9 +1,5 @@
 const fs = require('fs')
 
-// fs.readdir('./backups', (err, files)=> {
-//     err? console.log(err) : console.log(files)
-// })
-
 if (!process.argv[2]) {
     console.log(`Give input to delete \n to delete all -  delete_backup all \n to delete particular backup -  delete_backup <Location_of_backup>`)
 }
