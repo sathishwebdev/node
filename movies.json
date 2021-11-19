@@ -1,13 +1,4 @@
-// const Sum = (num) => num[0] + num[1]
-
-// const numbers = [+process.argv[2], +process.argv[3]]
-
-// console.log(Sum(numbers))
-// console.log(global)
-
-let queries = ["Romance","Comedy","Musical"]
-
-let data = [{
+[{
     "id": "1",
     "name": "Peaky Blinders",
     "category": "Series",
@@ -145,24 +136,3 @@ let data = [{
     "Language" : "ENGLISH",
     "Rating" : 8
 }]
-
-
-const getGenreResult = () => {
-    let ulti = []
-    data.forEach((movie)=> {
-      for(let i = 0 ; i < movie.genre.length; i++ ){
-        queries.forEach(query =>{
-             if(movie.genre[i].toUpperCase() === query.toUpperCase()){
-                console.log(query)
-                ulti.push(movie)
-            }
-        })
-           
-        }
-    })
-    return ulti
-}
-        
-
-
-console.log(result())

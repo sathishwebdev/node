@@ -1,4 +1,4 @@
 //in - built pakages in node js
 
-const os = require('os');
-console.log(os.version(), os.freemem(), os.totalmem(), os.cpus())
+import { version, freemem, totalmem, cpus } from 'os';
+console.log(version(), freemem(), totalmem(), cpus())

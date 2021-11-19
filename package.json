@@ -1,0 +1,31 @@
+{
+  "name": "node-study",
+  "version": "1.0.0",
+  "description": "study purpose",
+  "main": "index.js",
+  "type": "module" ,
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "test study "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sathishwebdev/node.git"
+  },
+  "keywords": [
+    "node",
+    "examples"
+  ],
+  "author": "sathishwebdev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sathishwebdev/node/issues"
+  },
+  "homepage": "https://github.com/sathishwebdev/node#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
