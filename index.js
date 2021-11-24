@@ -2,14 +2,8 @@ import fs from 'fs';
 import express from 'express';
 import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
-import {
-    allMovies,
-    findByName,
-    getById,
-    deleteMovie,
-    addMovie,
-    editMovie
-} from './helper.js';
+import { moviesRouter } from './routes/movies.js';
+
 
 dotenv.config()
 const app = express();
@@ -43,16 +37,10 @@ app.get('/',  (request, response)=>{
     response.send(indexData  || {message: "no data founded"})
 });
 
-app.get('/movies', allMovies);
 
-app.delete('/movies/:id', deleteMovie);
+// routes
 
-app.put('/movies/:id', editMovie);
+app.use('/movies', moviesRouter )
 
-app.post('/movies', addMovie );
-
-app.get('/movies/byname/:name', findByName);
-
-app.get('/movies/:id', getById );
 
 app.listen(PORT, ()=> console.log("Server started in port " + PORT))
