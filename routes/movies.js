@@ -10,16 +10,20 @@ import {
 
 const router = express.Router();
 
-router.get('/', allMovies);
+router
+.route('/')
+.get(allMovies)
+.post( addMovie );
 
-router.delete('/:id', deleteMovie);
+router
+.route('/:id')
+.delete(deleteMovie)
+.put(editMovie)
+.get(getById );
 
-router.put('/:id', editMovie);
 
-router.post('/', addMovie );
+router
+.get('/byname/:name', findByName);
 
-router.get('/byname/:name', findByName);
-
-router.get('/:id', getById );
 
 export const moviesRouter = router
