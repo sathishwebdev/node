@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 9000
 app.use(express.json()) // make requests as json
 
 // mongo db config
-const MONGO_URL = process.env.DB_URL
+const MONGO_URL = process.env.MONGO_URL
 
  // create db connection 
 
