@@ -1,0 +1,28 @@
+{
+    "_id": "619b409d96b2078fd62c8e1b",
+    "id": "6",
+    "name": "Avengers",
+    "category": "Movie",
+    "poster": "https://sothebys-md.brightspotcdn.com/dims4/default/656d1d9/2147483647/strip/true/crop/4265x6369+0+0/resize/800x1195!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fmedia-desk%2Fa5%2Ffd%2F8fb5cfc24a7da8f0f8a93d58dc7d%2F252.%20THE%20AVENGERS.jpg",
+    "summary": "Nick Fury is compelled to launch the Avengers Initiative when Loki poses a threat to planet Earth. His squad of superheroes put their minds together to accomplish the task.",
+    "genre": [
+        "Action",
+        "Super hero",
+        "Adventure",
+        "Science Fiction",
+        "Fantasy"
+    ],
+    "releaseDate": "27 April 2012 ",
+    "watchOn": {
+        "link": "https://www.hotstar.com/in/movies/marvels-the-avengers/1660000015/watch?utm_source=gwa",
+        "name": "HotStar"
+    },
+    "trailer": "https://youtube.com/embed/eOrNdBpGMv8",
+    "counts": {
+        "likes": 0,
+        "disLikes": 0,
+        "status": ""
+    },
+    "Language": "ENGLISH",
+    "Rating": 9.2
+}

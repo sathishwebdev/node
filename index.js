@@ -1,7 +1,8 @@
-import { readFile, readFileSync, } from 'fs';
+import fs from 'fs';
 import express from 'express';
 import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
+import { get } from 'http';
 
 dotenv.config()
 const app = express();
@@ -22,12 +23,31 @@ const MONGO_URL = process.env.DB_URL
 
 createConnection() 
 
+// backup the deleting file
 
+const backup = (fileData) =>{
+    fileData = JSON.stringify(fileData)
+    let date = new Date().toLocaleDateString('en-us')
+    date = date.split('/');
+    date = `${date[1]}-${date[0]}-${date[2]}`
+    let time = new Date().toLocaleTimeString('en-in')
+
+    if (!fs.existsSync(`./backups/${date}`)){
+        fs.mkdirSync(`./backups/${date}`, { recursive: true });
+    }
+    fs.readdir(`./backups/${date}`,(err,files)=>{
+        fs.writeFile(`./backups/${date}/backup_on_${files.length}.json`, fileData  , (err) => err? console.log(err) : console.log(`Back up on ${date} Completed at ${time} !!`)) 
+    })
+   
+
+}
 
 
 //  read html file 
 let indexData = ''
-readFile('./test.html', 'utf-8', (err, data)=> err? console.log(err) : indexData = data)
+fs.readFile('./test.html', 'utf-8', (err, data)=> err? console.log(err) : indexData = data)
+
+
 
 app.get('/', (request, response)=>{
 
@@ -82,7 +102,36 @@ app.get('/movies/:id', async (request, response)=>{
     response.send(filterResponse || {message: "no data founded"})
 });
 
+// delete movie by id with 
+app.delete('/movies/:id', async (request, response)=>{
+    const client = await createConnection()
+   
+    let dataToBackUp = await client
+    .db("Movies")
+    .collection("Movie DB")
+    .findOne({id: request.params.id})
+    backup(dataToBackUp) 
+    let filterResponse = await client
+    .db("Movies")
+    .collection("Movie DB")
+    .deleteOne({id: request.params.id})
+    response.send(filterResponse || {message: "no data founded"})
+});
 
+
+// edit movie data
+
+
+app.put('/movies/:id', async (request, response)=>{
+    const data =  request.body
+    const client = await createConnection()
+    console.log({id: request.params.id, ...data})
+    let result = await client
+    .db("Movies")
+    .collection("Movie DB")
+    .updateOne({id: request.params.id},{$set : data})
+    response.send(result)
+});
 // add movie data into DB
 
 app.post('/movies', async (request, response)=>{
