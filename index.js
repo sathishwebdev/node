@@ -7,7 +7,7 @@ import { moviesRouter } from './routes/movies.js';
 
 dotenv.config()
 const app = express();
-const PORT = process.env.HOST_PORT
+const PORT = process.env.PORT || 9000
 app.use(express.json()) // make requests as json
 
 // mongo db config
