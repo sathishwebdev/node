@@ -1,5 +1,6 @@
 import { client } from './index.js';
 import fs from 'fs';
+import bcrypt from 'bcrypt'
 
 // backup the deleting file
 export const backup = (fileData) => {
@@ -99,7 +100,47 @@ const findByName = async (request, response)=>{
     response.send(filterResponse || {message: "no data founded"})
 }
 
+// authentication
+
+const keyGenerator = async (password)=>{
+   if(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/.test(`${password}`)){
+       
+     // salting   
+    const saltedKey = await bcrypt.genSalt(10)
+    //  hash the saltedKey
+    const hashedKey = await bcrypt.hash(password, saltedKey)
+    return hashedKey
+}else {
+    return null
+}
+}
+
+// Signup
+
+const getSignup = async ({username, password}) =>{
+//    check username already exist
+    let checkUserAvailability = await client
+    .db("Movies")
+    .collection("users")
+    .findOne({username})
+    if(checkUserAvailability){
+        return {message : "Username Already Exist - Better Luck Next Time 😈"}
+    }
+   else{ 
+    let responce = await client
+    .db("Movies")
+    .collection("users")
+    .insertOne({username, password})
+
+    return {responce, data:{username,password}}
+}
+}
+
+
+
 export {
+    keyGenerator,
+    getSignup,
     allMovies,
     findByName,
     getById,
