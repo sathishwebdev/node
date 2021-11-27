@@ -102,31 +102,23 @@ const findByName = async (request, response)=>{
 
 // authentication
 
-const keyGenerator = async (password)=>{
-   if(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/.test(`${password}`)){
-       
+const keyGenerator = async (password)=>{    
      // salting   
     const saltedKey = await bcrypt.genSalt(10)
     //  hash the saltedKey
     const hashedKey = await bcrypt.hash(password, saltedKey)
     return hashedKey
-}else {
-    return null
 }
-}
+
+// users
+
+// get user by name
+const getUserByName = async (name) => await client.db("Movies").collection("users").findOne({username: name})
+
 
 // Signup
 
 const getSignup = async ({username, password}) =>{
-//    check username already exist
-    let checkUserAvailability = await client
-    .db("Movies")
-    .collection("users")
-    .findOne({username})
-    if(checkUserAvailability){
-        return {message : "Username Already Exist - Better Luck Next Time 😈"}
-    }
-   else{ 
     let responce = await client
     .db("Movies")
     .collection("users")
@@ -134,11 +126,11 @@ const getSignup = async ({username, password}) =>{
 
     return {responce, data:{username,password}}
 }
-}
 
 
 
 export {
+    getUserByName,
     keyGenerator,
     getSignup,
     allMovies,

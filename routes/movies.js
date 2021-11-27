@@ -7,12 +7,12 @@ import {
     addMovie,
     editMovie
 } from '../helper.js';
-
+import { auth } from '../middleware/auth.js';
 const router = express.Router();
 
 router
 .route('/')
-.get(allMovies)
+.get( allMovies)
 .post( addMovie );
 
 router

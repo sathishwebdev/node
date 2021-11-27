@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import { moviesRouter } from './routes/movies.js';
 import { usersRouter } from './routes/users.js';
 import cors from  'cors'
-
+import {auth} from './middleware/auth.js'
 dotenv.config()
 const app = express();
 const PORT = process.env.PORT || 9000
@@ -41,8 +41,8 @@ app.get('/',  (request, response)=>{
 
 // routes
 
-app.use('/movies', moviesRouter )
-app.use('/users', usersRouter )
+app.use('/movies',auth, moviesRouter )
+app.use('/users', usersRouter)
 
 
 app.listen(PORT, ()=> console.log("Server started in port " + PORT))
