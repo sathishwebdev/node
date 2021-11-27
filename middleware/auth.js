@@ -8,7 +8,7 @@ export const auth = async (req, res, next)=>{
         const token = req.header("auth-token")
         let checkToken = jwt.verify(token, process.env.SECRET_KEY)
         let get_DB_Data = await client.db("Movies").collection("users").findOne({_id:new ObjectId(checkToken)})
-        console.log(`Successfully login with ${get_DB_Data.username} !!`)
+        console.log(`Successfully login with user -  ${get_DB_Data.username} !!`)
         next();
     }catch(err){
         res.status(401).send({message: "Invalid page"})

@@ -3,12 +3,17 @@ import {keyGenerator, getSignup, getUserByName} from '../helper.js';
 import fs from 'fs';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import { adAuth } from '../middleware/adAuth.js';
+import { client } from '../index.js';
 
 
 const router = express.Router();
 router
 .route('/')
-.get((req, res)=>res.send("Need to <a href='users/signup'>sign up</a>"))
+.get(adAuth,async (req, res)=>{
+    let userData = await client.db("Movies").collection("users").find({}).toArray()
+    res.send(userData)
+})
 
 router
 .route('/signup')

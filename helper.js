@@ -127,9 +127,25 @@ const getSignup = async ({username, password}) =>{
     return {responce, data:{username,password}}
 }
 
+// admin
+    // get admin by name
+const getAdminByName = async (name) => await client.db("Movies").collection("admin").findOne({username: name})
+
+    // create Admin
+
+    const createAdmin = async ({username, password}) =>{
+        let responce = await client
+        .db("Movies")
+        .collection("admin")
+        .insertOne({username, password})
+    
+        return {responce, data:{username,password}}
+    }
 
 
 export {
+    createAdmin,
+    getAdminByName,
     getUserByName,
     keyGenerator,
     getSignup,

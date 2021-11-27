@@ -4,6 +4,7 @@ import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
 import { moviesRouter } from './routes/movies.js';
 import { usersRouter } from './routes/users.js';
+import { adminRouter } from './routes/admin.js';
 import cors from  'cors'
 import {auth} from './middleware/auth.js'
 dotenv.config()
@@ -43,6 +44,7 @@ app.get('/',  (request, response)=>{
 
 app.use('/movies',auth, moviesRouter )
 app.use('/users', usersRouter)
+app.use('/admin', adminRouter)
 
 
 app.listen(PORT, ()=> console.log("Server started in port " + PORT))
