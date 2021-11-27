@@ -11,6 +11,6 @@ export const auth = async (req, res, next)=>{
         console.log(`Successfully login with ${get_DB_Data.username} !!`)
         next();
     }catch(err){
-        res.status(401).send({error:err.message})
+        res.status(401).send({message: "Invalid page"})
     }
 }
