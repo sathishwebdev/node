@@ -1,10 +1,12 @@
 import express from 'express';
-import {keyGenerator, getSignup, getUserByName} from '../helper.js';
+import {keyGenerator, getSignup, getUserByName, editUser} from '../helper.js';
 import fs from 'fs';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { adAuth } from '../middleware/adAuth.js';
 import { client } from '../index.js';
+import { ObjectId } from 'bson';
+
 
 
 const router = express.Router();
@@ -78,6 +80,9 @@ router
 })
 .get((req, res)=> res.send(fs.readFileSync('./login.html', 'utf-8')))
 
+router
+.route('/edit/:id')
+.put(adAuth, editUser)
 
 
 export const usersRouter = router

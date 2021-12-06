@@ -1,6 +1,7 @@
 import { client } from './index.js';
 import fs from 'fs';
 import bcrypt from 'bcrypt'
+import { ObjectId } from 'bson';
 
 // backup the deleting file
 export const backup = (fileData) => {
@@ -78,6 +79,22 @@ const editMovie =  async (request, response)=>{
 }
 
 
+// edit User data
+
+const editUser =  async (request, response)=>{
+    const data =  request.body
+    let result = await client
+    .db("Movies")
+    .collection("users")
+    .updateOne({_id: new ObjectId(request.params.id)},{$set : data})
+
+    let filterResponse = await client
+    .db("Movies")
+    .collection("users")
+    .findOne({_id: new ObjectId(request.params.id)})
+    response.send( result.modifiedCount !== 0? filterResponse : {message: "no data founded"})
+}
+
 
 // add movie data into DB
 
@@ -154,5 +171,6 @@ export {
     getById,
     deleteMovie,
     addMovie,
-    editMovie
+    editMovie,
+    editUser
 }
