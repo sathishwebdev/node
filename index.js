@@ -42,7 +42,7 @@ app.get('/',  (request, response)=>{
 
 // routes
 
-app.use('/movies',auth, moviesRouter )
+app.use('/movies',moviesRouter )
 app.use('/users', usersRouter)
 app.use('/admin', adminRouter)
 
